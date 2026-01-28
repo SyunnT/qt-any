@@ -1,0 +1,108 @@
+{
+  "name": "qt-class-creator",
+  "displayName": "Qt Class Creator",
+  "description": "Create Qt classes (UI/Non-UI) and open .ui files in Qt Designer",
+  "version": "0.0.2",
+  "publisher": "qt-class-creator",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/example/qt-class-creator"
+  },
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "qt-class-creator-explorer",
+          "title": "Qt Class Creator",
+          "icon": "resources/qt-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "qt-class-creator-explorer": [
+        {
+          "type": "webview",
+          "id": "qtClassCreator.view",
+          "name": "Create Class"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Qt Class Creator",
+      "properties": {
+        "qt-class-creator.designerPath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to the Qt Designer executable (designer.exe)"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "qt-class-creator.createClass",
+        "title": "Qt: Create Class (Non-UI)"
+      },
+      {
+        "command": "qt-class-creator.createUiClass",
+        "title": "Qt: Create UI Class"
+      },
+      {
+        "command": "qt-class-creator.openInDesigner",
+        "title": "Open in Qt Designer"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "qt-class-creator.openInDesigner",
+          "when": "resourceExtname == .ui",
+          "group": "navigation"
+        },
+        {
+          "command": "qt-class-creator.createClass",
+          "group": "1_modification",
+          "when": "explorerResourceIsFolder"
+        },
+        {
+          "command": "qt-class-creator.createUiClass",
+          "group": "1_modification",
+          "when": "explorerResourceIsFolder"
+        }
+      ]
+    },
+    "languages": [
+      {
+        "id": "qt-ui",
+        "aliases": [
+          "Qt UI File",
+          "ui"
+        ],
+        "extensions": [
+          ".ui"
+        ],
+        "icon": {
+          "light": "./resources/ui-file.svg",
+          "dark": "./resources/ui-file.svg"
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "^16.11.7",
+    "typescript": "^4.9.3"
+  }
+}
