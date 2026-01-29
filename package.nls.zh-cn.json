@@ -1,0 +1,14 @@
+{
+    "qt-any.description": "创建Qt类（UI/非UI）并在Qt Designer中打开.ui文件",
+    "qt-any.configuration.title": "Qt Any",
+    "qt-any.configuration.qtPath.description": "Qt安装根目录的路径 (例如: C:\\Qt\\6.5.0\\mingw_64)",
+    "qt-any.command.createClass.title": "Qt Any: 创建Qt类",
+    "qt-any.command.createUiClass.title": "Qt Any: 创建UI类",
+    "qt-any.command.createCppClass.title": "Qt Any: 创建C++类",
+    "qt-any.command.createQrc.title": "Qt Any: 创建Qt资源文件 (.qrc)",
+    "qt-any.command.openInDesigner.title": "Qt Any: 在Qt Designer中打开",
+    "qt-any.command.openInLinguist.title": "Qt Any: 在Qt Linguist中打开",
+    "qt-any.language.ui.alias": "Qt UI文件",
+    "qt-any.language.ts.alias": "Qt 翻译文件",
+    "qt-any.language.qrc.alias": "Qt 资源文件"
+}

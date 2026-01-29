@@ -1,7 +1,7 @@
 {
   "name": "qt-any",
   "displayName": "Qt Any",
-  "description": "Create Qt classes (UI/Non-UI) and open .ui files in Qt Designer",
+  "description": "%qt-any.description%",
   "version": "2.0.0",
   "publisher": "Syunn",
   "icon": "resources/icon.png",
@@ -18,31 +18,39 @@
   "main": "./out/extension.js",
   "contributes": {
     "configuration": {
-      "title": "Qt Any",
+      "title": "%qt-any.configuration.title%",
       "properties": {
         "qt-any.qtPath": {
           "type": "string",
           "default": "",
-          "description": "Path to the Qt installation root directory (e.g., C:\\Qt\\6.5.0\\mingw_64)"
+          "description": "%qt-any.configuration.qtPath.description%"
         }
       }
     },
     "commands": [
       {
         "command": "qt-any.createClass",
-        "title": "Qt Any: Create Class (Non-UI)"
+        "title": "%qt-any.command.createClass.title%"
       },
       {
         "command": "qt-any.createUiClass",
-        "title": "Qt Any: Create UI Class"
+        "title": "%qt-any.command.createUiClass.title%"
+      },
+      {
+        "command": "qt-any.createCppClass",
+        "title": "%qt-any.command.createCppClass.title%"
+      },
+      {
+        "command": "qt-any.createQrc",
+        "title": "%qt-any.command.createQrc.title%"
       },
       {
         "command": "qt-any.openInDesigner",
-        "title": "Qt Any: Open in Qt Designer"
+        "title": "%qt-any.command.openInDesigner.title%"
       },
       {
         "command": "qt-any.openInLinguist",
-        "title": "Qt Any: Open in Qt Linguist"
+        "title": "%qt-any.command.openInLinguist.title%"
       }
     ],
     "menus": {
@@ -54,17 +62,27 @@
         },
         {
           "command": "qt-any.openInLinguist",
-          "when": "resourceExtname == .ts",
+          "when": "resourceLangId == qt-ts",
           "group": "navigation"
         },
         {
+          "command": "qt-any.createCppClass",
+          "group": "1_modification@1",
+          "when": "explorerResourceIsFolder"
+        },
+        {
           "command": "qt-any.createClass",
-          "group": "1_modification",
+          "group": "1_modification@2",
           "when": "explorerResourceIsFolder"
         },
         {
           "command": "qt-any.createUiClass",
-          "group": "1_modification",
+          "group": "1_modification@3",
+          "when": "explorerResourceIsFolder"
+        },
+        {
+          "command": "qt-any.createQrc",
+          "group": "1_modification@4",
           "when": "explorerResourceIsFolder"
         }
       ]
@@ -73,7 +91,7 @@
       {
         "id": "qt-ui",
         "aliases": [
-          "Qt UI File",
+          "%qt-any.language.ui.alias%",
           "ui"
         ],
         "extensions": [
@@ -87,7 +105,7 @@
       {
         "id": "qt-ts",
         "aliases": [
-          "Qt Translation File",
+          "%qt-any.language.ts.alias%",
           "ts"
         ],
         "extensions": [],
@@ -100,7 +118,7 @@
       {
         "id": "qt-qrc",
         "aliases": [
-          "Qt Resource File",
+          "%qt-any.language.qrc.alias%",
           "qrc"
         ],
         "extensions": [
