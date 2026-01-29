@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 
 export class QtCreatorViewProvider implements vscode.WebviewViewProvider {
 
-    public static readonly viewType = 'qtClassCreator.view';
+    public static readonly viewType = 'qtAny.view';
 
     private _view?: vscode.WebviewView;
 
@@ -29,7 +29,7 @@ export class QtCreatorViewProvider implements vscode.WebviewViewProvider {
         webviewView.webview.onDidReceiveMessage(data => {
             switch (data.type) {
                 case 'createClass':
-                    vscode.commands.executeCommand('qt-class-creator.internal.createClass', data);
+                    vscode.commands.executeCommand('qt-any.internal.createClass', data);
                     break;
                 case 'selectFolder':
                     this._selectFolder();
@@ -61,7 +61,7 @@ export class QtCreatorViewProvider implements vscode.WebviewViewProvider {
     <meta charset="UTF-8">
     <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource} 'unsafe-inline'; script-src 'nonce-${nonce}';">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qt Class Creator</title>
+    <title>Qt Any</title>
     <style>
         body {
             padding: 10px;

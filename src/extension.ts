@@ -14,23 +14,23 @@ export function activate(context: vscode.ExtensionContext) {
     );
 
     // Command: Create Class from View (Internal)
-    context.subscriptions.push(vscode.commands.registerCommand('qt-class-creator.internal.createClass', async (data) => {
+    context.subscriptions.push(vscode.commands.registerCommand('qt-any.internal.createClass', async (data) => {
         // data.keepCase comes from the webview
         await createClassFiles(data.path, data.className, data.baseClass, data.hasUi, data.keepCase);
     }));
 
     // Command: Create Non-UI Class (Context Menu / Palette)
-    let createClassDisposable = vscode.commands.registerCommand('qt-class-creator.createClass', async (uri: vscode.Uri) => {
+    let createClassDisposable = vscode.commands.registerCommand('qt-any.createClass', async (uri: vscode.Uri) => {
         await createQtClass(uri, false);
     });
 
     // Command: Create UI Class (Context Menu / Palette)
-    let createUiClassDisposable = vscode.commands.registerCommand('qt-class-creator.createUiClass', async (uri: vscode.Uri) => {
+    let createUiClassDisposable = vscode.commands.registerCommand('qt-any.createUiClass', async (uri: vscode.Uri) => {
         await createQtClass(uri, true);
     });
 
     // Command: Open in Qt Designer
-    let openDesignerDisposable = vscode.commands.registerCommand('qt-class-creator.openInDesigner', async (uri: vscode.Uri) => {
+    let openDesignerDisposable = vscode.commands.registerCommand('qt-any.openInDesigner', async (uri: vscode.Uri) => {
         await openInDesigner(uri);
     });
 
@@ -134,7 +134,7 @@ async function openInDesigner(uri: vscode.Uri) {
         return;
     }
 
-    const config = vscode.workspace.getConfiguration('qt-class-creator');
+    const config = vscode.workspace.getConfiguration('qt-any');
     let designerPath = config.get<string>('designerPath');
 
     if (!designerPath || designerPath.trim().length === 0) {
@@ -143,7 +143,7 @@ async function openInDesigner(uri: vscode.Uri) {
             'Configure Now'
         );
         if (selection === 'Configure Now') {
-            vscode.commands.executeCommand('workbench.action.openSettings', 'qt-class-creator.designerPath');
+            vscode.commands.executeCommand('workbench.action.openSettings', 'qt-any.designerPath');
         }
         return;
     }

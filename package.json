@@ -1,13 +1,13 @@
 {
-  "name": "qt-class-creator",
-  "displayName": "Qt Class Creator",
+  "name": "qt-any",
+  "displayName": "Qt Any",
   "description": "Create Qt classes (UI/Non-UI) and open .ui files in Qt Designer",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "publisher": "Syunn",
   "icon": "resources/icon.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/SyunnT/vscode-plugin-Qt-Class-Creator"
+    "url": "https://github.com/SyunnT/qt-any"
   },
   "engines": {
     "vscode": "^1.90.0"
@@ -15,31 +15,33 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onView:qtAny.view"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "qt-class-creator-explorer",
-          "title": "Qt Class Creator",
+          "id": "qt-any-explorer",
+          "title": "Qt Any",
           "icon": "resources/qt-icon.svg"
         }
       ]
     },
     "views": {
-      "qt-class-creator-explorer": [
+      "qt-any-explorer": [
         {
           "type": "webview",
-          "id": "qtClassCreator.view",
-          "name": "Create Class"
+          "id": "qtAny.view",
+          "name": "Qt Any"
         }
       ]
     },
     "configuration": {
-      "title": "Qt Class Creator",
+      "title": "Qt Any",
       "properties": {
-        "qt-class-creator.designerPath": {
+        "qt-any.designerPath": {
           "type": "string",
           "default": "",
           "description": "Path to the Qt Designer executable (designer.exe)"
@@ -48,32 +50,32 @@
     },
     "commands": [
       {
-        "command": "qt-class-creator.createClass",
-        "title": "Qt: Create Class (Non-UI)"
+        "command": "qt-any.createClass",
+        "title": "Qt Any: Create Class (Non-UI)"
       },
       {
-        "command": "qt-class-creator.createUiClass",
-        "title": "Qt: Create UI Class"
+        "command": "qt-any.createUiClass",
+        "title": "Qt Any: Create UI Class"
       },
       {
-        "command": "qt-class-creator.openInDesigner",
-        "title": "Open in Qt Designer"
+        "command": "qt-any.openInDesigner",
+        "title": "Qt Any: Open in Qt Designer"
       }
     ],
     "menus": {
       "explorer/context": [
         {
-          "command": "qt-class-creator.openInDesigner",
+          "command": "qt-any.openInDesigner",
           "when": "resourceExtname == .ui",
           "group": "navigation"
         },
         {
-          "command": "qt-class-creator.createClass",
+          "command": "qt-any.createClass",
           "group": "1_modification",
           "when": "explorerResourceIsFolder"
         },
         {
-          "command": "qt-class-creator.createUiClass",
+          "command": "qt-any.createUiClass",
           "group": "1_modification",
           "when": "explorerResourceIsFolder"
         }

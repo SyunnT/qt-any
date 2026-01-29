@@ -28,13 +28,13 @@ Alternatively, use the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) and typ
 
 ## Configuration
 
-Go to **Settings** -> **Extensions** -> **Qt Creator** and set the **Designer Path**.
+Go to **Settings** -> **Extensions** -> **Qt Any** and set the **Designer Path**.
 
 Or add this to your `settings.json`:
 
 ```json
 {
-    "qt-creator.designerPath": "C:\\Qt\\6.x.x\\mingw_64\\bin\\designer.exe"
+    "qt-any.designerPath": "C:\\Qt\\6.x.x\\mingw_64\\bin\\designer.exe"
 }
 ```
 
