@@ -75,7 +75,7 @@
         },
         {
           "command": "qt-any.openInLinguist",
-          "when": "resourceLangId == qt-ts",
+          "when": "resourceExtname == .ts",
           "group": "navigation"
         },
         {
