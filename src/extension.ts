@@ -3,21 +3,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as cp from 'child_process';
 import { getHeaderTemplate, getSourceTemplate, getUiTemplate } from './templates';
-import { QtCreatorViewProvider } from './qtCreatorView';
 
 export function activate(context: vscode.ExtensionContext) {
-
-    // Register Webview View Provider
-    const provider = new QtCreatorViewProvider(context.extensionUri);
-    context.subscriptions.push(
-        vscode.window.registerWebviewViewProvider(QtCreatorViewProvider.viewType, provider)
-    );
-
-    // Command: Create Class from View (Internal)
-    context.subscriptions.push(vscode.commands.registerCommand('qt-any.internal.createClass', async (data) => {
-        // data.keepCase comes from the webview
-        await createClassFiles(data.path, data.className, data.baseClass, data.hasUi, data.keepCase);
-    }));
 
     // Command: Create Non-UI Class (Context Menu / Palette)
     let createClassDisposable = vscode.commands.registerCommand('qt-any.createClass', async (uri: vscode.Uri) => {
@@ -34,9 +21,15 @@ export function activate(context: vscode.ExtensionContext) {
         await openInDesigner(uri);
     });
 
+    // Command: Open in Qt Linguist
+    let openLinguistDisposable = vscode.commands.registerCommand('qt-any.openInLinguist', async (uri: vscode.Uri) => {
+        await openInLinguist(uri);
+    });
+
     context.subscriptions.push(createClassDisposable);
     context.subscriptions.push(createUiClassDisposable);
     context.subscriptions.push(openDesignerDisposable);
+    context.subscriptions.push(openLinguistDisposable);
 }
 
 async function createQtClass(uri: vscode.Uri, hasUi: boolean) {
@@ -79,14 +72,67 @@ async function createQtClass(uri: vscode.Uri, hasUi: boolean) {
     }
 
     // Default base classes for context menu commands
-    const baseClass = hasUi ? 'QWidget' : 'QObject';
-    // Default keepCase to false for context menu (legacy behavior)
-    await createClassFiles(targetPath, className, baseClass, hasUi, false);
+    let baseClass = hasUi ? 'QWidget' : 'QObject';
+    
+    // If hasUi is true, let user select the base class
+    if (hasUi) {
+        const selectedBase = await vscode.window.showQuickPick(['QWidget', 'QMainWindow', 'QDialog'], {
+            placeHolder: 'Select Base Class',
+            canPickMany: false
+        });
+        
+        if (!selectedBase) {
+            return; // User cancelled
+        }
+        baseClass = selectedBase;
+    }
+
+    // Determine filename
+    let baseFileName = className.toLowerCase();
+    
+    const namingOptions = [
+        { label: 'Lowercase', description: `e.g. ${className.toLowerCase()}`, detail: 'Use all lowercase for filenames' },
+        { label: 'Keep Case', description: `e.g. ${className}`, detail: 'Use class name casing for filenames' },
+        { label: 'Custom...', description: '', detail: 'Enter a custom filename' }
+    ];
+
+    const selectedNaming = await vscode.window.showQuickPick(namingOptions, {
+        placeHolder: 'Select Filename Style',
+        canPickMany: false
+    });
+
+    if (!selectedNaming) {
+        return;
+    }
+
+    if (selectedNaming.label === 'Keep Case') {
+        baseFileName = className;
+    } else if (selectedNaming.label === 'Custom...') {
+        const customName = await vscode.window.showInputBox({
+            prompt: 'Enter Filename (without extension)',
+            placeHolder: 'my_custom_filename',
+            validateInput: (text) => {
+                if (!text || text.trim().length === 0) {
+                    return 'Filename cannot be empty';
+                }
+                if (!/^[a-zA-Z0-9_-]+$/.test(text)) {
+                    return 'Invalid filename';
+                }
+                return null;
+            }
+        });
+        if (!customName) {
+            return;
+        }
+        baseFileName = customName;
+    }
+
+    await createClassFiles(targetPath, className, baseClass, hasUi, baseFileName);
 }
 
-async function createClassFiles(targetPath: string, className: string, baseClass: string, hasUi: boolean, keepCase: boolean) {
+async function createClassFiles(targetPath: string, className: string, baseClass: string, hasUi: boolean, baseFileName: string) {
     // Determine filename base
-    const baseName = keepCase ? className : className.toLowerCase();
+    const baseName = baseFileName;
     
     const headerPath = path.join(targetPath, `${baseName}.h`);
     const sourcePath = path.join(targetPath, `${baseName}.cpp`);
@@ -135,18 +181,21 @@ async function openInDesigner(uri: vscode.Uri) {
     }
 
     const config = vscode.workspace.getConfiguration('qt-any');
-    let designerPath = config.get<string>('designerPath');
+    let qtPath = config.get<string>('qtPath');
 
-    if (!designerPath || designerPath.trim().length === 0) {
+    if (!qtPath || qtPath.trim().length === 0) {
         const selection = await vscode.window.showWarningMessage(
-            'Qt Designer path is not configured.',
+            'Qt path is not configured.',
             'Configure Now'
         );
         if (selection === 'Configure Now') {
-            vscode.commands.executeCommand('workbench.action.openSettings', 'qt-any.designerPath');
+            vscode.commands.executeCommand('workbench.action.openSettings', 'qt-any.qtPath');
         }
         return;
     }
+
+    // Construct path to designer executable
+    const designerPath = path.join(qtPath, 'bin', 'designer.exe');
 
     // Execute designer
     // Use quotes around paths to handle spaces
@@ -155,6 +204,65 @@ async function openInDesigner(uri: vscode.Uri) {
     cp.exec(command, (err, stdout, stderr) => {
         if (err) {
             vscode.window.showErrorMessage(`Failed to open Qt Designer: ${err.message}`);
+            console.error(err);
+        }
+    });
+}
+
+async function openInLinguist(uri: vscode.Uri) {
+    let filePath = uri ? uri.fsPath : undefined;
+    
+    if (!filePath || !filePath.endsWith('.ts')) {
+        // Try to find current active editor if it's a .ts file
+        const editor = vscode.window.activeTextEditor;
+        if (editor && editor.document.fileName.endsWith('.ts')) {
+            filePath = editor.document.fileName;
+        }
+    }
+
+    if (!filePath) {
+        vscode.window.showErrorMessage('No .ts file selected.');
+        return;
+    }
+
+    // Verify file content is a Qt translation file
+    try {
+        const fileContent = fs.readFileSync(filePath, { encoding: 'utf-8', flag: 'r' });
+        // Read first 1000 chars to check for TS tag
+        const header = fileContent.substring(0, 1000);
+        if (!header.includes('<TS') && !header.includes('<!DOCTYPE TS>')) {
+            vscode.window.showErrorMessage(`The file "${path.basename(filePath)}" does not appear to be a valid Qt translation file.`);
+            return;
+        }
+    } catch (err: any) {
+        vscode.window.showErrorMessage(`Failed to read file: ${err.message}`);
+        return;
+    }
+
+    const config = vscode.workspace.getConfiguration('qt-any');
+    let qtPath = config.get<string>('qtPath');
+
+    if (!qtPath || qtPath.trim().length === 0) {
+        const selection = await vscode.window.showWarningMessage(
+            'Qt path is not configured.',
+            'Configure Now'
+        );
+        if (selection === 'Configure Now') {
+            vscode.commands.executeCommand('workbench.action.openSettings', 'qt-any.qtPath');
+        }
+        return;
+    }
+
+    // Construct path to linguist executable
+    const linguistPath = path.join(qtPath, 'bin', 'linguist.exe');
+
+    // Execute linguist
+    // Use quotes around paths to handle spaces
+    const command = `"${linguistPath}" "${filePath}"`;
+    
+    cp.exec(command, (err, stdout, stderr) => {
+        if (err) {
+            vscode.window.showErrorMessage(`Failed to open Qt Linguist: ${err.message}`);
             console.error(err);
         }
     });

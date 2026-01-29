@@ -15,36 +15,15 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [
-    "onView:qtAny.view"
-  ],
   "main": "./out/extension.js",
   "contributes": {
-    "viewsContainers": {
-      "activitybar": [
-        {
-          "id": "qt-any-explorer",
-          "title": "Qt Any",
-          "icon": "resources/qt-icon.svg"
-        }
-      ]
-    },
-    "views": {
-      "qt-any-explorer": [
-        {
-          "type": "webview",
-          "id": "qtAny.view",
-          "name": "Qt Any"
-        }
-      ]
-    },
     "configuration": {
       "title": "Qt Any",
       "properties": {
-        "qt-any.designerPath": {
+        "qt-any.qtPath": {
           "type": "string",
           "default": "",
-          "description": "Path to the Qt Designer executable (designer.exe)"
+          "description": "Path to the Qt installation root directory (e.g., C:\\Qt\\6.5.0\\mingw_64)"
         }
       }
     },
@@ -60,6 +39,10 @@
       {
         "command": "qt-any.openInDesigner",
         "title": "Qt Any: Open in Qt Designer"
+      },
+      {
+        "command": "qt-any.openInLinguist",
+        "title": "Qt Any: Open in Qt Linguist"
       }
     ],
     "menus": {
@@ -67,6 +50,11 @@
         {
           "command": "qt-any.openInDesigner",
           "when": "resourceExtname == .ui",
+          "group": "navigation"
+        },
+        {
+          "command": "qt-any.openInLinguist",
+          "when": "resourceExtname == .ts",
           "group": "navigation"
         },
         {
@@ -94,6 +82,33 @@
         "icon": {
           "light": "./resources/ui-file.svg",
           "dark": "./resources/ui-file.svg"
+        }
+      },
+      {
+        "id": "qt-ts",
+        "aliases": [
+          "Qt Translation File",
+          "ts"
+        ],
+        "extensions": [],
+        "firstLine": "^\\s*<",
+        "icon": {
+          "light": "./resources/ts-file.svg",
+          "dark": "./resources/ts-file.svg"
+        }
+      },
+      {
+        "id": "qt-qrc",
+        "aliases": [
+          "Qt Resource File",
+          "qrc"
+        ],
+        "extensions": [
+          ".qrc"
+        ],
+        "icon": {
+          "light": "./resources/qrc-file.svg",
+          "dark": "./resources/qrc-file.svg"
         }
       }
     ]

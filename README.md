@@ -1,40 +1,41 @@
-# Qt Class Creator
+# Qt Any
 
-This extension provides a convenient way to create Qt classes and open `.ui` files in Qt Designer directly from your editor.
+This extension provides a convenient way to create Qt classes, open `.ui` files in Qt Designer, and open `.ts` files in Qt Linguist directly from your editor.
 
 ## Features
 
 - **Create Qt Class (Non-UI)**: Generates `.h` and `.cpp` files with a basic `QObject` based class structure.
 - **Create Qt UI Class**: Generates `.h`, `.cpp`, and `.ui` files with a `QWidget` based class structure and proper UI setup code.
-- **Open in Qt Designer**: Right-click on any `.ui` file in the Explorer and select "Open in Qt Designer".
+- **Open in Qt Designer**: Right-click on any `.ui` file in the Explorer and select "Qt Any: Open in Qt Designer".
+- **Open in Qt Linguist**: Right-click on any `.ts` file in the Explorer and select "Qt Any: Open in Qt Linguist".
 
 ## Usage
 
 ### Creating Classes
 
 1. Right-click on a folder in the Explorer.
-2. Select **Qt: Create Class (Non-UI)** or **Qt: Create UI Class**.
+2. Select **Qt Any: Create Class (Non-UI)** or **Qt Any: Create UI Class**.
 3. Enter the class name (e.g., `MyWidget`).
 4. The extension will generate the files (e.g., `mywidget.h`, `mywidget.cpp`, `mywidget.ui`) and open the header file.
 
-Alternatively, use the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) and type `Qt: Create Class`.
+Alternatively, use the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) and type `Qt Any: Create Class`.
 
-### Opening Qt Designer
+### Opening Qt Tools
 
-1. Right-click on a `.ui` file in the Explorer.
-2. Select **Open in Qt Designer**.
+- **Qt Designer**: Right-click on a `.ui` file and select **Qt Any: Open in Qt Designer**.
+- **Qt Linguist**: Right-click on a `.ts` file and select **Qt Any: Open in Qt Linguist**.
 
-**Note**: You need to configure the path to your Qt Designer executable first.
+**Note**: You need to configure the path to your Qt installation root directory first.
 
 ## Configuration
 
-Go to **Settings** -> **Extensions** -> **Qt Any** and set the **Designer Path**.
+Go to **Settings** -> **Extensions** -> **Qt Any** and set the **Qt Path**.
 
 Or add this to your `settings.json`:
 
 ```json
 {
-    "qt-any.designerPath": "C:\\Qt\\6.x.x\\mingw_64\\bin\\designer.exe"
+    "qt-any.qtPath": "C:\\Qt\\6.5.0\\mingw_64"
 }
 ```
 

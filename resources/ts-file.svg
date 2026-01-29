@@ -4,5 +4,5 @@
   <!-- Folded Corner (Darker Green) -->
   <path d="M40 4 V16 H52" fill="#2ea03b"/>
   <!-- Text -->
-  <text x="32" y="42" font-family="Arial, sans-serif" font-weight="bold" font-size="24" text-anchor="middle" fill="#000000">UI</text>
+  <text x="32" y="42" font-family="Arial, sans-serif" font-weight="bold" font-size="24" text-anchor="middle" fill="#000000">TS</text>
 </svg>
