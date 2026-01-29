@@ -16,7 +16,20 @@
     "Other"
   ],
   "main": "./out/extension.js",
+  "l10n": "./l10n",
   "contributes": {
+    "customEditors": [
+      {
+        "viewType": "qt-any.qrcEditor",
+        "displayName": "Qt Resource Editor",
+        "selector": [
+          {
+            "filenamePattern": "*.qrc"
+          }
+        ],
+        "priority": "default"
+      }
+    ],
     "configuration": {
       "title": "%qt-any.configuration.title%",
       "properties": {

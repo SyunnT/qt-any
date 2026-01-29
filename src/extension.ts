@@ -3,8 +3,12 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as cp from 'child_process';
 import { getHeaderTemplate, getSourceTemplate, getUiTemplate, getQrcTemplate, getCppHeaderTemplate, getCppSourceTemplate } from './templates';
+import { QrcEditorProvider } from './qrcEditor';
 
 export function activate(context: vscode.ExtensionContext) {
+
+    // Register Custom Editor for .qrc files
+    context.subscriptions.push(QrcEditorProvider.register(context));
 
     // Command: Create Non-UI Class (Context Menu / Palette)
     let createClassDisposable = vscode.commands.registerCommand('qt-any.createClass', async (uri: vscode.Uri) => {

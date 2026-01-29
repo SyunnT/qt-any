@@ -31,5 +31,20 @@
     "No .ts file selected.": "No .ts file selected.",
     "The file \"{0}\" does not appear to be a valid Qt translation file.": "The file \"{0}\" does not appear to be a valid Qt translation file.",
     "Failed to read file: {0}": "Failed to read file: {0}",
-    "Failed to open Qt Linguist: {0}": "Failed to open Qt Linguist: {0}"
+    "Failed to open Qt Linguist: {0}": "Failed to open Qt Linguist: {0}",
+    "Add Prefix": "Add Prefix",
+    "Add Files": "Add Files",
+    "Remove": "Remove",
+    "Edit as XML": "Edit as XML",
+    "Select a file to preview": "Select a file to preview",
+    "Are you sure?": "Are you sure?",
+    "Yes": "Yes",
+    "No": "No",
+    "Enter new prefix": "Enter new prefix",
+    "Please select a prefix first.": "Please select a prefix first.",
+    "Remove prefix '{0}' and all its files?": "Remove prefix '{0}' and all its files?",
+    "Remove file '{0}'?": "Remove file '{0}'?",
+    "Close Preview": "Close Preview",
+    "Prefix must start with '/'": "Prefix must start with '/'",
+    "Copy Resource Path": "Copy Resource Path"
 }
