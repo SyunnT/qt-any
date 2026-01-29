@@ -2,12 +2,12 @@
   "name": "qt-class-creator",
   "displayName": "Qt Class Creator",
   "description": "Create Qt classes (UI/Non-UI) and open .ui files in Qt Designer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "Syunn",
   "icon": "resources/icon.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/example/qt-class-creator"
+    "url": "https://github.com/SyunnT/vscode-plugin-Qt-Class-Creator"
   },
   "engines": {
     "vscode": "^1.90.0"
