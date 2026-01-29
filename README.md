@@ -1,51 +1,84 @@
-# Qt Class Creator
+# Qt Any
 
-This extension provides a convenient way to create Qt classes and open `.ui` files in Qt Designer directly from your editor.
+[English](README.md) | [简体中文](README.zh-CN.md)
+
+Qt Any is a powerful VS Code extension designed to streamline your Qt development workflow. It provides a comprehensive set of tools for creating Qt classes, managing resources, and integrating with external Qt tools.
 
 ## Features
 
-- **Create Qt Class (Non-UI)**: Generates `.h` and `.cpp` files with a basic `QObject` based class structure.
-- **Create Qt UI Class**: Generates `.h`, `.cpp`, and `.ui` files with a `QWidget` based class structure and proper UI setup code.
-- **Open in Qt Designer**: Right-click on any `.ui` file in the Explorer and select "Open in Qt Designer".
+- **Create Qt Classes**: Quickly generate Qt-compatible C++ classes with `.h`, `.cpp`, and optional `.ui` files.
+- **Visual QRC Editor**: A WYSIWYG editor for Qt Resource files (`.qrc`), supporting add/remove/preview operations.
+- **External Tool Integration**: Seamlessly open `.ui` files in Qt Designer and `.ts` files in Qt Linguist.
+- **Localization**: Fully localized in English and Simplified Chinese.
+
+---
 
 ## Usage
 
-### Creating Classes
+### 1. Create Qt Classes
 
-1. Right-click on a folder in the Explorer.
-2. Select **Qt: Create Class (Non-UI)** or **Qt: Create UI Class**.
-3. Enter the class name (e.g., `MyWidget`).
-4. The extension will generate the files (e.g., `mywidget.h`, `mywidget.cpp`, `mywidget.ui`) and open the header file.
+Generate standard Qt class boilerplates effortlessly.
 
-Alternatively, use the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) and type `Qt: Create Class`.
+- **Command**: `Qt Any: Create Qt Class` (Non-UI) or `Qt Any: Create UI Class`.
+- **How to use**:
+    1. Right-click on a folder in the File Explorer.
+    2. Select **Qt Any: Create Qt Class** (for QObject-based) or **Qt Any: Create UI Class** (for QWidget-based).
+    3. Enter the class name (e.g., `MyWidget`).
+    4. (Optional) Select the base class (QWidget, QMainWindow, QDialog).
+    5. Choose the filename style (lowercase, keep case, or custom).
 
-### Opening Qt Designer
+![Create Qt Class Demo](doc/create.gif)
 
-1. Right-click on a `.ui` file in the Explorer.
-2. Select **Open in Qt Designer**.
+### 2. Visual QRC Editor
 
-**Note**: You need to configure the path to your Qt Designer executable first.
+Manage your Qt resources (`.qrc`) with a user-friendly graphical interface.
+
+- **Open Editor**: Simply click on any `.qrc` file in the File Explorer.
+- **Features**:
+    - **Add Prefix**: Create new resource prefixes (must start with `/`).
+    - **Add Files**: Import files into specific prefixes.
+    - **Preview**: Click on any file (images, text) to preview its content in the right panel.
+    - **Copy Resource Path**: Right-click on a file node to copy its resource path (e.g., `:/images/logo.png`) to the clipboard.
+    - **Edit as XML**: Switch to raw XML editing mode if needed.
+
+![QRC Editor Screenshot](doc/qrc_edit.gif)
+![Right-click Menu](doc/copy_resource.gif)
+
+### 3. External Tools Integration
+
+Open specific file types in their native Qt editors.
+
+- **Qt Designer**: Right-click on a `.ui` file -> **Qt Any: Open in Qt Designer**.
+- **Qt Linguist**: Right-click on a `.ts` file -> **Qt Any: Open in Qt Linguist**.
+
+> **Note**: This requires configuring the `qt-any.qtPath` setting.
+
+![External Tools Demo](doc/right_open.gif)
+
+### 4. Create Pure C++ Class
+
+For non-Qt specific C++ classes.
+
+- **Command**: `Qt Any: Create C++ Class`.
+- **How to use**: Right-click on a folder -> **Qt Any: Create C++ Class** -> Follow the wizard.
+
+---
 
 ## Configuration
 
-Go to **Settings** -> **Extensions** -> **Qt Creator** and set the **Designer Path**.
+To use external tools (Designer/Linguist), you must configure the path to your Qt installation.
 
-Or add this to your `settings.json`:
+1. Open VS Code Settings (`Ctrl+,`).
+2. Search for `qt-any`.
+3. Set **Qt Any: Qt Path** to your Qt kit directory (the folder containing `bin`, `include`, `lib`).
+
+**Example**:
+- Windows: `C:\Qt\6.5.0\mingw_64`
+- macOS: `/Users/username/Qt/6.5.0/macos`
+- Linux: `/opt/Qt/6.5.0/gcc_64`
 
 ```json
 {
-    "qt-creator.designerPath": "C:\\Qt\\6.x.x\\mingw_64\\bin\\designer.exe"
+    "qt-any.qtPath": "C:\\Qt\\6.5.0\\mingw_64"
 }
 ```
-
-## Development
-
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
-2. Compile the extension:
-   ```bash
-   npm run compile
-   ```
-3. Press `F5` to start debugging in a new Extension Development Host window.

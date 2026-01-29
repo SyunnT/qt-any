@@ -98,3 +98,44 @@ export function getUiTemplate(className: string, baseClass: string = 'QWidget'):
 </ui>
 `;
 }
+
+export function getQrcTemplate(): string {
+    return `<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/">
+    </qresource>
+</RCC>
+`;
+}
+
+export function getCppHeaderTemplate(className: string): string {
+    const includeGuard = `${className.toUpperCase()}_H`;
+    
+    return `#ifndef ${includeGuard}
+#define ${includeGuard}
+
+class ${className}
+{
+public:
+    ${className}();
+    ~${className}();
+};
+
+#endif // ${includeGuard}
+`;
+}
+
+export function getCppSourceTemplate(className: string, headerFileName: string = ''): string {
+    const headerName = headerFileName ? headerFileName : className.toLowerCase();
+
+    return `#include "${headerName}.h"
+
+${className}::${className}()
+{
+}
+
+${className}::~${className}()
+{
+}
+`;
+}

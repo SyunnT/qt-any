@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Document Shape -->
+  <path d="M12 4 H40 L52 16 V60 H12 Z" fill="#41cd52"/>
+  <!-- Folded Corner (Darker Green) -->
+  <path d="M40 4 V16 H52" fill="#2ea03b"/>
+  <!-- Text -->
+  <text x="32" y="42" font-family="Arial, sans-serif" font-weight="bold" font-size="24" text-anchor="middle" fill="#000000">TS</text>
+</svg>

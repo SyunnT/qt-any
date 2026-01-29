@@ -1,0 +1,14 @@
+{
+    "qt-any.description": "Create Qt classes (UI/Non-UI) and open .ui files in Qt Designer",
+    "qt-any.configuration.title": "Qt Any",
+    "qt-any.configuration.qtPath.description": "Path to the Qt installation root directory (e.g., C:\\Qt\\6.5.0\\mingw_64)",
+    "qt-any.command.createClass.title": "Qt Any: Create Qt Class",
+    "qt-any.command.createUiClass.title": "Qt Any: Create UI Class",
+    "qt-any.command.createCppClass.title": "Qt Any: Create C++ Class",
+    "qt-any.command.createQrc.title": "Qt Any: Create Qt Resource File (.qrc)",
+    "qt-any.command.openInDesigner.title": "Qt Any: Open in Qt Designer",
+    "qt-any.command.openInLinguist.title": "Qt Any: Open in Qt Linguist",
+    "qt-any.language.ui.alias": "Qt UI File",
+    "qt-any.language.ts.alias": "Qt Translation File",
+    "qt-any.language.qrc.alias": "Qt Resource File"
+}
