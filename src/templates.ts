@@ -4,9 +4,9 @@ export function getHeaderTemplate(className: string, baseClass: string = 'QObjec
     
     let includes = '';
     if (hasUi) {
-        includes = `#include <${baseClass}>`;
+        includes = `#include <${baseClass}>\n`;
     } else {
-        includes = `#include <QObject>`;
+        includes = `#include <QObject>\n`;
     }
 
     let namespaceDecl = '';
@@ -26,16 +26,14 @@ export function getHeaderTemplate(className: string, baseClass: string = 'QObjec
     return `#ifndef ${includeGuard}
 #define ${includeGuard}
 
-${includes}
-${namespaceDecl}
+${includes}${namespaceDecl}
 class ${className} : ${inherit}
 {
     Q_OBJECT
 
 public:
 ${constructor}
-${destructor}
-${uiMember}
+${destructor}${uiMember}
 };
 
 #endif // ${includeGuard}
@@ -43,7 +41,7 @@ ${uiMember}
 }
 
 export function getSourceTemplate(className: string, baseClass: string = 'QObject', hasUi: boolean = false, headerFileName: string = ''): string {
-    const uiInit = hasUi ? `,\n    ui(new Ui::${className})` : '';
+    const uiInit = hasUi ? `\n    , ui(new Ui::${className})` : '';
     const uiSetup = hasUi ? `\n    ui->setupUi(this);` : '';
     const uiDelete = hasUi ? `\n    delete ui;` : '';
     const parentType = hasUi ? 'QWidget' : 'QObject';
@@ -57,8 +55,8 @@ export function getSourceTemplate(className: string, baseClass: string = 'QObjec
 
     return `#include "${headerName}.h"
 ${hasUi ? `#include "ui_${headerName}.h"\n` : ''}
-${className}::${className}(${parentType} *parent) :
-    ${baseConstructor}${uiInit}
+${className}::${className}(${parentType} *parent)
+    : ${baseConstructor}${uiInit}
 {${uiSetup}
 }
 
@@ -136,6 +134,71 @@ ${className}::${className}()
 
 ${className}::~${className}()
 {
+}
+`;
+}
+
+export function getGlobalHeaderTemplate(projectName: string, exportMacro: string): string {
+    const includeGuard = `${projectName.toUpperCase()}_GLOBAL_H`;
+    return `#ifndef ${includeGuard}
+#define ${includeGuard}
+
+#include <QtCore/qglobal.h>
+
+#ifdef ${projectName.toUpperCase()}_LIBRARY
+#define ${exportMacro} Q_DECL_EXPORT
+#else
+#define ${exportMacro} Q_DECL_IMPORT
+#endif
+
+#endif // ${includeGuard}
+`;
+}
+
+export function getMainCppTemplate(isQt: boolean, hasUi: boolean, includeFile: string = '', className: string = ''): string {
+    if (isQt && hasUi) {
+        return `#include <QApplication>
+#include "${includeFile}"
+
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    ${className} w;
+    w.show();
+    return a.exec();
+}
+`;
+    } else if (isQt) { // Qt Console
+        return `#include <QCoreApplication>
+#include "${includeFile}"
+
+int main(int argc, char *argv[])
+{
+    QCoreApplication a(argc, argv);
+    ${className} c;
+
+    return a.exec();
+}
+`;
+    } else { // Standard C++
+        return `#include <iostream>
+
+int main()
+{
+    std::cout << "Hello World!" << std::endl;
+    return 0;
+}
+`;
+    }
+}
+
+export function getMainCTemplate(): string {
+    return `#include <stdio.h>
+
+int main()
+{
+    printf("Hello World!\\n");
+    return 0;
 }
 `;
 }

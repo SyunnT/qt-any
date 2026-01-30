@@ -1,0 +1,4 @@
+cmake_minimum_required(VERSION {{CMAKE_MIN_VERSION}})
+project({{PROJECT_NAME}} LANGUAGES {{LANGUAGES}})
+
+{{STANDARD_SETTINGS}}
