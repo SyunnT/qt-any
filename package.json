@@ -1,8 +1,8 @@
 {
   "name": "qt-any",
   "displayName": "Qt Any",
-  "description": "Create Qt classes (UI/Non-UI) and open .ui files in Qt Designer",
-  "version": "2.0.1",
+  "description": "Qt development toolkit for VS Code",
+  "version": "2.1.0",
   "publisher": "Syunn",
   "icon": "resources/icon.png",
   "repository": {
@@ -13,7 +13,7 @@
     "vscode": "^1.90.0"
   },
   "categories": [
-    "Other"
+    "Programming Languages"
   ],
   "main": "./out/extension.js",
   "l10n": "./l10n",
@@ -37,37 +37,108 @@
           "type": "string",
           "default": "",
           "description": "%qt-any.configuration.qtPath.description%"
+        },
+        "qt-any.menus.showCreateProject": {
+          "type": "boolean",
+          "default": true,
+          "description": "%qt-any.configuration.showCreateProject.description%"
+        },
+        "qt-any.menus.showEditTemplates": {
+          "type": "boolean",
+          "default": false,
+          "description": "%qt-any.configuration.showEditTemplates.description%"
+        },
+        "qt-any.menus.showLocalConfig": {
+          "type": "boolean",
+          "default": false,
+          "description": "%qt-any.configuration.showLocalConfig.description%"
+        },
+        "qt-any.menus.showCreateClass": {
+          "type": "boolean",
+          "default": true,
+          "description": "%qt-any.configuration.showCreateClass.description%"
+        },
+        "qt-any.menus.showCreateUiClass": {
+          "type": "boolean",
+          "default": true,
+          "description": "%qt-any.configuration.showCreateUiClass.description%"
+        },
+        "qt-any.menus.showCreateCppClass": {
+          "type": "boolean",
+          "default": true,
+          "description": "%qt-any.configuration.showCreateCppClass.description%"
+        },
+        "qt-any.menus.showCreateQrc": {
+          "type": "boolean",
+          "default": true,
+          "description": "%qt-any.configuration.showCreateQrc.description%"
         }
       }
     },
     "commands": [
       {
         "command": "qt-any.createClass",
-        "title": "%qt-any.command.createClass.title%"
+        "title": "%qt-any.command.createClass.title%",
+        "category": "Qt Any"
       },
       {
         "command": "qt-any.createUiClass",
-        "title": "%qt-any.command.createUiClass.title%"
+        "title": "%qt-any.command.createUiClass.title%",
+        "category": "Qt Any"
       },
       {
         "command": "qt-any.createCppClass",
-        "title": "%qt-any.command.createCppClass.title%"
+        "title": "%qt-any.command.createCppClass.title%",
+        "category": "Qt Any"
       },
       {
         "command": "qt-any.createQrc",
-        "title": "%qt-any.command.createQrc.title%"
+        "title": "%qt-any.command.createQrc.title%",
+        "category": "Qt Any"
       },
       {
         "command": "qt-any.openInDesigner",
-        "title": "%qt-any.command.openInDesigner.title%"
+        "title": "%qt-any.command.openInDesigner.title%",
+        "category": "Qt Any"
       },
       {
         "command": "qt-any.openInLinguist",
-        "title": "%qt-any.command.openInLinguist.title%"
+        "title": "%qt-any.command.openInLinguist.title%",
+        "category": "Qt Any"
+      },
+      {
+        "command": "qt-any.createProject",
+        "title": "%qt-any.command.createProject.title%",
+        "category": "Qt Any"
+      },
+      {
+        "command": "qt-any.editTemplates",
+        "title": "%qt-any.command.editTemplates.title%",
+        "category": "Qt Any"
+      },
+      {
+        "command": "qt-any.openLocalConfig",
+        "title": "%qt-any.command.openLocalConfig.title%",
+        "category": "Qt Any"
       }
     ],
     "menus": {
       "explorer/context": [
+        {
+          "command": "qt-any.createProject",
+          "group": "0_creation@1",
+          "when": "explorerResourceIsFolder && config.qt-any.menus.showCreateProject"
+        },
+        {
+          "command": "qt-any.openLocalConfig",
+          "group": "0_creation@2",
+          "when": "explorerResourceIsFolder && config.qt-any.menus.showLocalConfig"
+        },
+        {
+          "command": "qt-any.editTemplates",
+          "group": "0_creation@3",
+          "when": "explorerResourceIsFolder && config.qt-any.menus.showEditTemplates"
+        },
         {
           "command": "qt-any.openInDesigner",
           "when": "resourceExtname == .ui",
@@ -81,22 +152,22 @@
         {
           "command": "qt-any.createCppClass",
           "group": "1_modification@1",
-          "when": "explorerResourceIsFolder"
+          "when": "explorerResourceIsFolder && config.qt-any.menus.showCreateCppClass"
         },
         {
           "command": "qt-any.createClass",
           "group": "1_modification@2",
-          "when": "explorerResourceIsFolder"
+          "when": "explorerResourceIsFolder && config.qt-any.menus.showCreateClass"
         },
         {
           "command": "qt-any.createUiClass",
           "group": "1_modification@3",
-          "when": "explorerResourceIsFolder"
+          "when": "explorerResourceIsFolder && config.qt-any.menus.showCreateUiClass"
         },
         {
           "command": "qt-any.createQrc",
           "group": "1_modification@4",
-          "when": "explorerResourceIsFolder"
+          "when": "explorerResourceIsFolder && config.qt-any.menus.showCreateQrc"
         }
       ]
     },

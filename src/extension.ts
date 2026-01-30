@@ -4,11 +4,32 @@ import * as path from 'path';
 import * as cp from 'child_process';
 import { getHeaderTemplate, getSourceTemplate, getUiTemplate, getQrcTemplate, getCppHeaderTemplate, getCppSourceTemplate } from './templates';
 import { QrcEditorProvider } from './qrcEditor';
+import { ProjectWizard } from './projectWizard';
+import { TemplateManager } from './templateManager';
 
 export function activate(context: vscode.ExtensionContext) {
 
     // Register Custom Editor for .qrc files
     context.subscriptions.push(QrcEditorProvider.register(context));
+
+    // Initialize Helpers
+    const projectWizard = new ProjectWizard(context);
+    const templateManager = new TemplateManager(context);
+
+    // Command: Create CMake Project (Context Menu / Palette)
+    let createProjectDisposable = vscode.commands.registerCommand('qt-any.createProject', async (uri: vscode.Uri) => {
+        await projectWizard.start(uri);
+    });
+
+    // Command: Edit Project Templates
+    let editTemplatesDisposable = vscode.commands.registerCommand('qt-any.editTemplates', async () => {
+        await templateManager.editTemplates();
+    });
+
+    // Command: Configure Local File Copying
+    let openLocalConfigDisposable = vscode.commands.registerCommand('qt-any.openLocalConfig', async () => {
+        await templateManager.openLocalConfig();
+    });
 
     // Command: Create Non-UI Class (Context Menu / Palette)
     let createClassDisposable = vscode.commands.registerCommand('qt-any.createClass', async (uri: vscode.Uri) => {
@@ -46,6 +67,9 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(createQrcDisposable);
     context.subscriptions.push(openDesignerDisposable);
     context.subscriptions.push(openLinguistDisposable);
+    context.subscriptions.push(createProjectDisposable);
+    context.subscriptions.push(editTemplatesDisposable);
+    context.subscriptions.push(openLocalConfigDisposable);
 }
 
 async function createQrcFile(uri: vscode.Uri) {
