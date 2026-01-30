@@ -1,5 +1,4 @@
 {
-    "qt-any.description": "Create Qt classes (UI/Non-UI) and open .ui files in Qt Designer",
     "qt-any.configuration.title": "Qt Any",
     "qt-any.configuration.qtPath.description": "Path to the Qt installation root directory (e.g., C:\\Qt\\6.5.0\\mingw_64)",
     "qt-any.command.createClass.title": "Qt Any: Create Qt Class",
