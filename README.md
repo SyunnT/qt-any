@@ -10,6 +10,9 @@ Qt Any is a powerful VS Code extension designed to streamline your Qt developmen
 - **Visual QRC Editor**: A WYSIWYG editor for Qt Resource files (`.qrc`), supporting add/remove/preview operations.
 - **External Tool Integration**: Seamlessly open `.ui` files in Qt Designer and `.ts` files in Qt Linguist.
 - **Localization**: Fully localized in English and Simplified Chinese.
+- **Create CMake Project**: Quickly create CMake-based Qt projects with necessary file structure and configuration. Supports custom CMakeLists.txt templates.
+- **Context Menu Configuration**: Enable/disable context menu items to customize your workflow.
+- **Copy Files on Project Creation**: Automatically copy specified files (e.g., `.clang-format`) to the project directory when creating a new project. Supports local file groups to avoid syncing path-specific configurations.
 
 ---
 
@@ -62,6 +65,24 @@ For non-Qt specific C++ classes.
 - **Command**: `Qt Any: Create C++ Class`.
 - **How to use**: Right-click on a folder -> **Qt Any: Create C++ Class** -> Follow the wizard.
 
+### 5. Create CMake Project
+
+Create CMake-based Qt projects.
+
+- **Command**: `Qt Any: Create CMake Project`.
+- **How to use**: Right-click on a folder -> **Create CMake Project** -> Follow the wizard.
+
+![Create CMake Project Demo](doc/create_cmake_project.gif)
+
+### 6. Copy Files on Project Creation
+
+Copy specific files to the project directory when creating a new project.
+
+- **Configuration**: Use **Qt Any: Configure Local File Copying**.
+- **How to use**: Open the local configuration, create file groups, and enter the absolute paths of the files to copy. When creating a project, select the file group, and the files will be automatically copied to the project directory (existing files will be overwritten).
+
+![Copy Files Demo](doc/copy_files.gif)
+
 ---
 
 ## Configuration
@@ -82,3 +103,10 @@ To use external tools (Designer/Linguist), you must configure the path to your Q
     "qt-any.qtPath": "C:\\Qt\\6.5.0\\mingw_64"
 }
 ```
+
+### 2. Configure Context Menu Items
+
+Enable or disable items in the context menu.
+
+- **Configuration**: Settings starting with `qt-any.show...`.
+- **How to use**: Open VS Code Settings, search for `qt-any`, and check/uncheck the items you want to display in the context menu.
