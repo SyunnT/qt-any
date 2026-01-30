@@ -143,7 +143,7 @@ export class QrcEditorProvider implements vscode.CustomTextEditorProvider {
 
             const ext = path.extname(absolutePath).toLowerCase();
             const imageExts = ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.bmp', '.ico'];
-            const textExts = ['.txt', '.cpp', '.h', '.js', '.ts', '.json', '.xml', '.html', '.css', '.qml', '.ui', '.md'];
+            const textExts = ['.txt', '.cpp', '.h', '.js', '.ts', '.json', '.xml', '.html', '.css', '.qml', '.ui', '.md', '.ini'];
 
             if (imageExts.includes(ext)) {
                 // For images, we need a webview URI

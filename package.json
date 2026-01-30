@@ -1,8 +1,8 @@
 {
   "name": "qt-any",
   "displayName": "Qt Any",
-  "description": "%qt-any.description%",
-  "version": "2.0.0",
+  "description": "Create Qt classes (UI/Non-UI) and open .ui files in Qt Designer",
+  "version": "2.0.1",
   "publisher": "Syunn",
   "icon": "resources/icon.png",
   "repository": {
