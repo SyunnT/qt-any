@@ -30,7 +30,7 @@ Generate standard Qt class boilerplates effortlessly.
     4. (Optional) Select the base class (QWidget, QMainWindow, QDialog).
     5. Choose the filename style (lowercase, keep case, or custom).
 
-![Create Qt Class Demo](doc/create.gif)
+![Create Qt Class Demo](https://cdn.jsdelivr.net/gh/SyunnT/qt-any@main/doc/create.gif)
 
 ### 2. Visual QRC Editor
 
@@ -44,8 +44,8 @@ Manage your Qt resources (`.qrc`) with a user-friendly graphical interface.
     - **Copy Resource Path**: Right-click on a file node to copy its resource path (e.g., `:/images/logo.png`) to the clipboard.
     - **Edit as XML**: Switch to raw XML editing mode if needed.
 
-![QRC Editor Screenshot](doc/qrc_edit.gif)
-![Right-click Menu](doc/copy_resource.gif)
+![QRC Editor Screenshot](https://cdn.jsdelivr.net/gh/SyunnT/qt-any@main/doc/qrc_edit.gif)
+![Right-click Menu](https://cdn.jsdelivr.net/gh/SyunnT/qt-any@main/doc/copy_resource.gif)
 
 ### 3. External Tools Integration
 
@@ -56,7 +56,7 @@ Open specific file types in their native Qt editors.
 
 > **Note**: This requires configuring the `qt-any.qtPath` setting.
 
-![External Tools Demo](doc/right_open.gif)
+![External Tools Demo](https://cdn.jsdelivr.net/gh/SyunnT/qt-any@main/doc/right_open.gif)
 
 ### 4. Create Pure C++ Class
 
@@ -72,7 +72,7 @@ Create CMake-based Qt projects.
 - **Command**: `Qt Any: Create CMake Project`.
 - **How to use**: Right-click on a folder -> **Create CMake Project** -> Follow the wizard.
 
-![Create CMake Project Demo](doc/create_cmake_project.gif)
+![Create CMake Project Demo](https://cdn.jsdelivr.net/gh/SyunnT/qt-any@main/doc/create_cmake_project.gif)
 
 ### 6. Copy Files on Project Creation
 
@@ -81,7 +81,7 @@ Copy specific files to the project directory when creating a new project.
 - **Configuration**: Use **Qt Any: Configure Local File Copying**.
 - **How to use**: Open the local configuration, create file groups, and enter the absolute paths of the files to copy. When creating a project, select the file group, and the files will be automatically copied to the project directory (existing files will be overwritten).
 
-![Copy Files Demo](doc/copy_files.gif)
+![Copy Files Demo](https://cdn.jsdelivr.net/gh/SyunnT/qt-any@main/doc/copy_files.gif)
 
 ---
 
