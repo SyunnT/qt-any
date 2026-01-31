@@ -2,7 +2,7 @@
   "name": "qt-any",
   "displayName": "Qt Any",
   "description": "Qt development toolkit for VS Code",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "publisher": "Syunn",
   "icon": "resources/icon.png",
   "repository": {
