@@ -30,7 +30,7 @@ Qt Any 是一款强大的 VS Code 扩展，旨在简化您的 Qt 开发工作流
     4. （可选）选择基类（QWidget, QMainWindow, QDialog）。
     5. 选择文件名风格（全小写、保持原样或自定义）。
 
-![创建 Qt 类演示](doc/create.gif)
+![创建 Qt 类演示](https://cdn.jsdelivr.net/gh/SyunnT/qt-any@main/doc/create.gif)
 
 ### 2. 可视化 QRC 编辑器
 
@@ -44,8 +44,8 @@ Qt Any 是一款强大的 VS Code 扩展，旨在简化您的 Qt 开发工作流
     - **复制资源路径**：在文件节点上点击右键，将资源路径（例如：`:/images/logo.png`）复制到剪贴板。
     - **以 XML 编辑**：如果需要，可切换到原始 XML 编辑模式。
 
-![QRC 编辑器截图](doc/qrc_edit.gif)
-![右键菜单](doc/copy_resource.gif)
+![QRC 编辑器截图](https://cdn.jsdelivr.net/gh/SyunnT/qt-any@main/doc/qrc_edit.gif)
+![右键菜单](https://cdn.jsdelivr.net/gh/SyunnT/qt-any@main/doc/copy_resource.gif)
 
 ### 3. 外部工具集成
 
@@ -56,7 +56,7 @@ Qt Any 是一款强大的 VS Code 扩展，旨在简化您的 Qt 开发工作流
 
 > **注意**：此功能需要先配置 `qt-any.qtPath` 设置。
 
-![外部工具演示](doc/right_open.gif)
+![外部工具演示](https://cdn.jsdelivr.net/gh/SyunnT/qt-any@main/doc/right_open.gif)
 
 ### 4. 创建纯 C++ 类
 
@@ -72,7 +72,7 @@ Qt Any 是一款强大的 VS Code 扩展，旨在简化您的 Qt 开发工作流
 - **命令**：`Qt Any: Create CMake Project`。
 - **如何使用**：在文件夹上点击右键 -> **Qt Any: Create CMake Project** -> 按照向导操作。
 
-![创建 CMake 项目演示](doc/create_cmake_project.gif)
+![创建 CMake 项目演示](https://cdn.jsdelivr.net/gh/SyunnT/qt-any@main/doc/create_cmake_project.gif)
 
 ### 6. 创建项目时拷贝文件
 
@@ -81,7 +81,7 @@ Qt Any 是一款强大的 VS Code 扩展，旨在简化您的 Qt 开发工作流
 - **配置项**：`qt-any.copyFiles`相关配置项
 - **如何使用**：打开对应的配置项，创建文件组，输入要拷贝的文件路径（在磁盘上的绝对路径），在创建项目时选择要拷贝的文件组，即可自动拷贝对应文件组的文件到项目目录（原有同名文件将被覆盖）。
 
-![创建项目时拷贝文件演示](doc/copy_files.gif)
+![创建项目时拷贝文件演示](https://cdn.jsdelivr.net/gh/SyunnT/qt-any@main/doc/copy_files.gif)
 
 ---
 
